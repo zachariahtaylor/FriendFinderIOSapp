@@ -1,0 +1,21 @@
+{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "Personal web server for use in serving personal pages and code blocks.",
+  "main": "server.js",
+  "scripts": {
+    "test": "Hello"
+  },
+  "repository": {
+    "type": "git",
+    "url": "na"
+  },
+  "keywords": [
+    "no"
+  ],
+  "author": "Zachariah Taylor",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

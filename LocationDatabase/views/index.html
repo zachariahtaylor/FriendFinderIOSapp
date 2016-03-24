@@ -8,8 +8,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     
 <script>
-$(document).ready(function(){
-    $("button").click(function(){
+    function Post(){
         $.post("/POST/Location",
         {
           ID: "Donald Duck",
@@ -19,11 +18,19 @@ $(document).ready(function(){
         function(data,status){
             alert("Data: " + data + "\nStatus: " + status);
         });
-    });
-});
+    };
+    
+    function Get(){
+        $.get("/GET/Location",
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    };
+
 </script>
 </head>
 <body>
-    <button>Send an HTTP POST request to a page and get the result back</button>
+    <button onclick="Post()">Post</button>
+    <button onclick="Get()">Get</button>
 </body>
 </html>

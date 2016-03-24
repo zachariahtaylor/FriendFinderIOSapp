@@ -18,7 +18,9 @@ router.get('/', function(req, res) {
 });
 
 
-router.get('/Get/Location', function(req, res){
+router.get('/GET/Location', function(req, res){
+    
+    console.log("/Get/Location");
     
     //Create promise to find all Locations
 	var promise = Location.find({}).exec();
@@ -31,16 +33,17 @@ router.get('/Get/Location', function(req, res){
 			locations.forEach(function(location) {
 				locationsArray.push(location);
 			});
-
+            
+            console.log(locationsArray);
 			res.json(locationsArray);
 		}) //Catch step: catch any arror thrown by promise.
 		.catch(function(err) {
 			res.json({
 				error: err.message
 			});
-		})
-		.done(); //Clean up.
+		});
 });
+
 //Allows user to find friends by id instead of grabbing all locations in database. Will be implemented in the future.
 router.get('/GET/Location/:id', function(req, res) {
 });
@@ -48,7 +51,8 @@ router.get('/GET/Location/:id', function(req, res) {
 router.post('/POST/Location', function(req, res) {
 
 	//var User = req.body.ID;
-    console.log(req.body);
+    //console.log(req.body);
+    console.log("/POST/Location");
     
     var data = new Location (req.body);
     

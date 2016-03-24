@@ -1,0 +1,11 @@
+branch-defaults:
+  default:
+    environment: LocationDatabase-dev
+    group_suffix: null
+global:
+  application_name: LocationDatabase
+  default_ec2_keyname: aws-eb
+  default_platform: Node.js
+  default_region: us-west-2
+  profile: eb-cli
+  sc: null

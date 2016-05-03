@@ -18,15 +18,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     var objectArray:[Object] = [];
     var Services = true;
     
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var sliderButton: UISlider!
+    @IBOutlet weak var LocationServiesButton: UIButton!
+    
     @IBAction func LocationServices(sender: AnyObject) {
         if(Services == true){
             Services = false;
             locationManager.stopUpdatingLocation();
+            LocationServiesButton.setTitle("Services Off", forState: UIControlState.Normal);
         }
         else{
             Services = true;
             locationManager.startUpdatingLocation();
+            LocationServiesButton.setTitle("Services On", forState: UIControlState.Normal);
         }
+    }
+    @IBAction func distanceSlider(sender: AnyObject) {
+        self.distanceAmount = Double(sliderButton.value);
+        distanceLabel.text = String(sliderButton.value);
+        distanceLabel.text = distanceLabel.text!+"m";
     }
     
     class Object {
@@ -59,6 +70,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
         mapkit.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
+        
+        Services = true;
+        locationManager.startUpdatingLocation();
+        LocationServiesButton.setTitle("Services On", forState: UIControlState.Normal);
     }
 
     override func didReceiveMemoryWarning() {
@@ -186,7 +201,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                         }
                     }
                     else{
-                        var newObject = Object(ID: id, Lat: lat, Lon: lon, Seen: false);
+                        let newObject = Object(ID: id, Lat: lat, Lon: lon, Seen: false);
                         self.objectArray.append(newObject);
                     }
                     
@@ -205,8 +220,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 for object in self.objectArray{
                     if(object.ID != String(UIDevice.currentDevice().name))
                     {
-                        if(self.calcDistance(locations, object: object) < self.distanceAmount && object.Seen == false){
-                            self.notificationMSG("Someone is nearby.");
+                        let distanceAway = self.calcDistance(locations, object: object);
+                        if(distanceAway < self.distanceAmount && object.Seen == false){
+                            self.notificationMSG(object.ID + " is " + String(format: "%f", (distanceAway)) + " meters away from you.");
                             var o = self.objectArray.filter({return $0.ID == object.ID});
                             o[0].Seen = true;
                         }

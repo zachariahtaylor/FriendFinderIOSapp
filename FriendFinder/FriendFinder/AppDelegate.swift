@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification){
         let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
-        let viewController = appDelegate.window!.rootViewController as! ViewController
+        _ = appDelegate.window!.rootViewController as! ViewController
         
         //viewController.Alert();
     }
